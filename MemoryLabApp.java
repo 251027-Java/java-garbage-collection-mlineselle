@@ -16,13 +16,22 @@ public class MemoryLabApp {
 
         List<byte[]> memoryBlocks = new ArrayList<>();
 
-        // TODO: Implement the following
-        // 1. Allocate memory in a loop (e.g., 1MB chunks)
-        // 2. Print memory status after each allocation
-        // 3. Handle OutOfMemoryError gracefully
-        // 4. Add a small delay between allocations for observation
+        final int ONE_MB = 1024 * 1024 * 5;
+        int allocationCount = 0;
 
-        // Your code here:
+        try {
+            while (true) {
+                memoryBlocks.add(new byte[ONE_MB]);
+                allocationCount++;
+
+                printMemoryStatus("After allocation #" + allocationCount);
+
+                Thread.sleep(500);
+            }
+        } catch (OutOfMemoryError e) {
+            System.err.println("\nOutOfMemoryError after " + allocationCount + " MB allocated");
+            printMemoryStatus("At OOM");
+        }
 
         printMemoryStatus("Final");
     }
